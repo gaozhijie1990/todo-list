@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办事项清单</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>待办事项清单</h1>
+            <p class="subtitle">高效管理你的每一天</p>
+        </header>
+
+        <form id="todo-form" class="todo-form">
+            <input
+                type="text"
+                id="todo-input"
+                placeholder="输入新任务，按回车添加..."
+                autocomplete="off"
+                maxlength="200"
+            >
+            <button type="submit" class="btn-add">添加</button>
+        </form>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="active">未完成</button>
+            <button class="filter-btn" data-filter="completed">已完成</button>
+        </div>
+
+        <ul id="todo-list" class="todo-list"></ul>
+
+        <footer class="footer" id="footer" style="display:none;">
+            <span id="todo-count" class="count"></span>
+            <button id="clear-completed" class="btn-clear">清除已完成</button>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
