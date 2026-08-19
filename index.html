@@ -7,10 +7,25 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // 在样式应用前同步设置主题，避免刷新时短暂闪烁（FOUC）
+        (function () {
+            try {
+                var saved = localStorage.getItem('todo-theme');
+                if (saved === 'dark' || saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
         <header>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换主题" title="切换深色/浅色模式">
+                <span class="theme-icon theme-icon-light">🌙</span>
+                <span class="theme-icon theme-icon-dark">☀️</span>
+            </button>
             <h1>待办事项清单</h1>
             <p class="subtitle">高效管理你的每一天</p>
         </header>

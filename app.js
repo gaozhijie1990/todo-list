@@ -14,6 +14,42 @@
     let todos = loadTodos();
     let currentFilter = 'all';
 
+    // ---- 主题切换（深色/浅色）----
+    const THEME_KEY = 'todo-theme';
+    const themeToggle = document.getElementById('theme-toggle');
+
+    function getStoredTheme() {
+        try {
+            const t = localStorage.getItem(THEME_KEY);
+            return t === 'dark' || t === 'light' ? t : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    function currentTheme() {
+        return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    }
+
+    function toggleTheme() {
+        const next = currentTheme() === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try {
+            localStorage.setItem(THEME_KEY, next);
+        } catch (e) {}
+    }
+
+    // 初始化主题：优先用已保存的值，否则默认浅色
+    applyTheme(getStoredTheme() || 'light');
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
     // ---- 持久化 ----
     function loadTodos() {
         try {

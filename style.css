@@ -18,8 +18,30 @@
     --danger-hover: #c53030;
     --success-bg: #f0fff4;
     --success-border: #9ae6b4;
+    --hover-bg: #f7fafc;
+    --footer-bg: #fafbfc;
     --shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     --radius: 16px;
+}
+
+/* 暗色模式：通过给 <html> 加 data-theme="dark" 切换 */
+[data-theme="dark"] {
+    --bg-gradient-start: #1a1f36;
+    --bg-gradient-end: #0f1320;
+    --card-bg: #1f2438;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --text-muted: #718096;
+    --border-color: #2d3748;
+    --accent: #7c93ff;
+    --accent-hover: #93a5ff;
+    --danger: #fc8181;
+    --danger-hover: #f56565;
+    --success-bg: #1c3a2b;
+    --success-border: #2f5240;
+    --hover-bg: #262c44;
+    --footer-bg: #181c2e;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -43,10 +65,54 @@ body {
 }
 
 header {
+    position: relative;
     padding: 36px 32px 24px;
     text-align: center;
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
     border-bottom: 1px solid var(--border-color);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s, transform 0.1s, border-color 0.2s;
+    line-height: 1;
+}
+
+.theme-toggle:hover {
+    background: var(--hover-bg);
+    border-color: var(--accent);
+}
+
+.theme-toggle:active {
+    transform: scale(0.92);
+}
+
+/* 同一时刻只显示当前主题对应的图标（图标的含义：点它就切到对应主题） */
+.theme-icon {
+    display: none;
+}
+
+/* 浅色（默认）下显示 🌙 —— 意为「点击进入夜晚/深色」 */
+[data-theme="light"] .theme-icon-light,
+html:not([data-theme="dark"]) .theme-icon-light {
+    display: inline;
+}
+
+/* 深色下显示 ☀️ —— 意为「点击进入白天/浅色」 */
+[data-theme="dark"] .theme-icon-dark {
+    display: inline;
 }
 
 h1 {
@@ -129,7 +195,7 @@ h1 {
 }
 
 .filter-btn:hover {
-    background: #f7fafc;
+    background: var(--hover-bg);
     color: var(--text-primary);
 }
 
@@ -175,7 +241,7 @@ h1 {
 }
 
 .todo-item:hover {
-    background: #f7fafc;
+    background: var(--hover-bg);
 }
 
 .todo-item.completed .todo-text {
@@ -268,7 +334,7 @@ h1 {
     justify-content: space-between;
     padding: 16px 32px;
     border-top: 1px solid var(--border-color);
-    background: #fafbfc;
+    background: var(--footer-bg);
 }
 
 .count {
